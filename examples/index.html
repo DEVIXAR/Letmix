@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Letmix - flash word</title>
+
+    <link href="css/rainbow.github.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./../lib/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="./../lib/jquery.min.js" type="text/javascript"></script>
+    <script src="rainbow-custom.min.js" type="text/javascript"></script>
+    <script src="./../dist/letmix.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="heading">Letmix</h1>
+            <div>
+                <h2 class="underheading">jQuery mix chars library. Use for beautiful!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <h3 class="download">Download</h3>
+            <div class="download-container">
+                <p>
+                    Download .js file
+                    <a target="_blank" href="../dist/letmix.min.js">Mini version</a> or
+                    <a target="_blank" href="../dist/letmix.js">Full version</a>
+                </p>
+                <br>
+                <p>
+                    <b>by Bower</b> <br>
+                <pre><code data-language="javascript">$> bower install letmix</code></pre>
+                </p>
+                <br>
+                <p>
+                    <b>by NPM</b> <br>
+                <pre><code data-language="javascript">$> npm install letmix</code></pre>
+                </p>
+                <br>
+                <p>
+                    Include
+                </p>
+                <p>
+
+                <pre><code id="include-script-jquery"></code><br><code id="include-script-letmix"></code></pre>
+
+                <script>$(document).ready(function () {
+                    $('#include-script-jquery')
+                            .text('<script src="jquery.min.js" type="text/javascript"><\/script>');
+                    $('#include-script-letmix')
+                            .text('<script src="letmix.min.js" type="text/javascript"><\/script>');
+                });</script>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <div class="text-center how-it-work">
+                <h2>How it work</h2>
+            </div>
+            <div>
+                <b>Є два типи роботи з текстом:</b>
+
+                <div class="example-wrapper">
+                    <span>перебір символів</span>
+                    <pre><code data-language="javascript">$('#element').Letmix();</code></pre>
+                    <div class="test-area" id="letmix-do">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDo()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <span>та біг по символах</span>
+                    <pre><code data-language="javascript">$('#element').Letmix('runner');</code></pre>
+                    <div class="test-area" id="letmix-runner">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunner()">Try</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <div class="text-center how-it-work">
+                <h2>Options</h2>
+            </div>
+
+            <div>
+                <h3><b>Перебір символів</b></h3>
+
+                <div class="example-wrapper">
+                    <div>
+                        Amount of chars when is generation
+                    </div>
+                    <div>>>> <b>Letmix.amountIterations:Integer </b></div>
+                    <div>Default: 3</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    amountIterations: 40
+});</code></pre>
+                    <div class="test-area" id="letmix-do-amount-iterations">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoAmountIterations()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Color iteration
+                    </div>
+                    <div>>>> <b>Letmix.colorIteration:String </b></div>
+                    <div>Default: CF3636</div>
+                    <div>
+                        <small>
+                            #123 => hex | 123 => hex | 123123 => hex | #123123 => hex | 123, 123, 123 => rgb | 123, 123,
+                            123, 0.4 => rgba
+                        </small>
+                    </div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    colorIteration: '#3f9'
+});</code></pre>
+                    <div class="test-area" id="letmix-do-color-iteration">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoColorIteration()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        List of chars
+                    </div>
+                    <div>>>> <b>Letmix.chars:Array< string > </b></div>
+                    <div>Default: ['A', 'a', 'B', 'b', 'C', 'c', '1', '2', '3']</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    chars: ['1', '2', '3', '4', '5', '6']
+});</code></pre>
+                    <div class="test-area" id="letmix-do-chars">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoChars()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Type iteration. How will be get char from list. <br><br>
+                        * random (get random item), line (get item by way), custom (get item by @customOrder)
+                    </div>
+                    <div>>>> <b>Letmix.typeIteration:String</b></div>
+                    <div>default: 'random'</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    typeIteration: 'line'
+});</code></pre>
+                    <div class="test-area" id="letmix-do-type-iteration">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoTypeIteration()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>Custom order list</div>
+                    <div>>>> <b>Letmix.customOrder:Array< Integer ></b></div>
+                    <div>default: [2, 1, 0]</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    typeIteration: 'custom',
+    customOrder: [1, 2, 3, 4, 0],
+    chars: ['A', 'B', 'C', 'D', 'E']
+});</code></pre>
+                    <div class="test-area" id="letmix-do-custom-order">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoCustomOrder()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>Speed for one iteration. -> A -> B</div>
+                    <div>>>> <b>Letmix.speedIteration:Integer (ms)</b></div>
+                    <div>default: 30</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    speedIteration: 100
+});</code></pre>
+                    <div class="test-area" id="letmix-do-speed-iteration">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoSpeedIteration()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>Wait some time & run</div>
+                    <div>>>> <b>Letmix.wait:Integer (ms)</b></div>
+                    <div>default: 0</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    wait: 1000 // Wait 1 sec. and start Letmix
+});</code></pre>
+                    <div class="test-area" id="letmix-do-wait">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoWait()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>Event start</div>
+                    <div>>>> <b>Letmix.start:Function( Function( Object ) )</b></div>
+                    <div>default: 0</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    start: function(object){
+        // object - you can use for some work
+        // object.addClass('active');
+
+        alert('Start');
+    }
+});</code></pre>
+                    <div class="test-area" id="letmix-do-start">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoStart()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>Event finish</div>
+                    <div>>>> <b>Letmix.end:Function( Function( Object ) )</b></div>
+                    <div>default: 0</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    end: function(object){
+        // object - you can use for next Letmix
+        // object.Letmix(); or object.removeClass('active');
+
+        alert('Finish');
+    }
+});</code></pre>
+                    <div class="test-area" id="letmix-do-end">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixDoEnd()">Try</button>
+                </div>
+
+            </div>
+            <br><br>
+            <div>
+                <h3><b>Біг по символах</b></h3>
+
+                <div class="example-wrapper">
+                    <div>
+                        Speed run
+                    </div>
+                    <div>>>> <b>Letmix.runner.speed:Integer </b></div>
+                    <div>Default: 50</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    speed: 300
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-speed">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerSpeed()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        color run char
+                    </div>
+                    <div>>>> <b>Letmix.runner.color:String </b></div>
+                    <div>Default: 'CF3636'</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    color: '0f0'
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-color">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerColor()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Direction for run. <- ->
+                    </div>
+                    <div>>>> <b>Letmix.runner.direction:String </b></div>
+                    <div>Default: 'right=>left'</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    direction: 'left=>right'
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-direction">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerDirection()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Stop run where this text
+                    </div>
+                    <div>>>> <b>Letmix.runner.stopWhere:String </b></div>
+                    <div>Default: ''</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    stopWhere: 'do'
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-stop-where">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerStopWhere()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Wait some time & run
+                    </div>
+                    <div>>>> <b>Letmix.runner.wait:Integer </b></div>
+                    <div>Default: 0</div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    wait: 1000 // wait a second and run
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-wait">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerWait()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Start runner event
+                    </div>
+                    <div>>>> <b>Letmix.runner.start:Function( Function( Object ) ) </b></div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    start: function(object) {
+        alert('Start runner');
+    }
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-start">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerStart()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <div>
+                        Finish runner event
+                    </div>
+                    <div>>>> <b>Letmix.runner.end:Function( Function( Object ) ) </b></div>
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    end: function(object) {
+        alert('Finish runner');
+    }
+});</code></pre>
+                    <div class="test-area" id="letmix-runner-end">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="letmixRunnerEnd()">Try</button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <div class="text-center how-it-work">
+                <h2>Examples</h2>
+            </div>
+            <div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    amountIterations: -1,
+    speedIteration: 20,
+    chars: ['_', ' '],
+    type: 'line',
+    colorIteration: '000',
+    end: function (e) {
+        e.Letmix('runner', {
+            direction: 'left=>right',
+            color: '0, 100, 200'
+        });
+        e.Letmix('runner', {
+            color: '0, 200, 20'
+        });
+    }
+});
+                    </code></pre>
+                    <div class="test-area" id="example1">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="example1()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    amountIterations: -1,
+    speedIteration: 20,
+    chars: ['a', 'b', 'x', 'z'],
+    typeIteration: 'line',
+    type: 'random',
+    colorIteration: '#32f732',
+    end: function (e) {
+        e.Letmix('runner', {
+            direction: 'left=>right',
+            color: '0, 100, 200',
+            stopWhere: 'We do that'
+        });
+        e.Letmix('runner', {
+            color: '0, 200, 20',
+            stopWhere: 'we love to d'
+        });
+    }
+});
+                    </code></pre>
+                    <div class="test-area" id="example2">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="example2()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">
+$('#element').Letmix({
+    amountIterations: 3,
+    speedIteration: 20,
+    chars: ['a', 'b', 'x', 'z'],
+    type: 'random',
+    colorIteration: '#32f732'
+}).ThenFlash(function (e) {
+    e.Letmix('runner', {
+        direction: 'left=>right',
+        color: '0, 100, 200'
+    }).ThenFlash(function (e) {
+        e.Letmix('runner', {
+            direction: 'left=>right',
+            color: '0, 100, 200'
+        });
+    });
+
+    e.Letmix('runner', {
+        color: '0, 200, 20'
+    }).ThenFlash(function (e) {
+        e.Letmix('runner', {
+            color: '0, 200, 20'
+        });
+    });
+});
+                    </code></pre>
+                    <div class="test-area" id="example3">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="example3()">Try</button>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre>
+                        <code data-language="javascript">
+$('#element').Letmix({
+    amountIterations: 3,
+    speedIteration: 20,
+    chars: ['a', 'b', 'x', 'z'],
+    type: 'random',
+    colorIteration: '#32f732'
+}).ThenFlash(function (e) {
+    e.Letmix('runner', {
+        stopWhere: 'love to do'
+    }).ThenFlash(function (e) {
+        e.Letmix('runner', {
+            stopWhere: 'love to do',
+            color: '333'
+        })
+    });
+
+    e.Letmix('runner', {
+        stopWhere: 'We do that we',
+        direction: 'left=>right'
+    }).ThenFlash(function (e) {
+        e.Letmix('runner', {
+            stopWhere: 'We do that we',
+            direction: 'left=>right',
+            color: '333'
+        })
+    });
+});
+                        </code>
+                    </pre>
+                    <div class="test-area" id="example4">We do that we love to do</div>
+                    <button class="btn btn-default" onclick="example4()">Try</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <h2>For developers</h2>
+            <div>
+                <h3>Install</h3>
+            </div>
+            <div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">$> git clone https://github.com/DEVIXAR/Letmix.git</code></pre>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">$> npm install</code></pre>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">$> grunt copy:libs</code></pre>
+                </div>
+
+                <div class="example-wrapper">
+                    <pre><code data-language="javascript">$> grunt</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center developed">
+                developed bY team <a target="_blank" href="http://devixar.com/">DEVIXAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function example4() {
+        $('#example4').Letmix({
+            amountIterations: 3,
+            speedIteration: 20,
+            chars: ['a', 'b', 'x', 'z'],
+            type: 'random',
+            colorIteration: '#32f732'
+        }).ThenFlash(function (e) {
+            e.Letmix('runner', {
+                stopWhere: 'love to do'
+            }).ThenFlash(function (e) {
+                e.Letmix('runner', {
+                    stopWhere: 'love to do',
+                    color: '333'
+                })
+            });
+
+            e.Letmix('runner', {
+                stopWhere: 'We do that we',
+                direction: 'left=>right'
+            }).ThenFlash(function (e) {
+                e.Letmix('runner', {
+                    stopWhere: 'We do that we',
+                    direction: 'left=>right',
+                    color: '333'
+                })
+            });
+        });
+    }
+
+    function example3() {
+        $('#example3').Letmix({
+            amountIterations: 3,
+            speedIteration: 20,
+            chars: ['a', 'b', 'x', 'z'],
+            type: 'random',
+            colorIteration: '#32f732'
+        }).ThenFlash(function (e) {
+            e.Letmix('runner', {
+                direction: 'left=>right',
+                color: '0, 100, 200'
+            }).ThenFlash(function (e) {
+                e.Letmix('runner', {
+                    direction: 'left=>right',
+                    color: '0, 100, 200',
+                });
+            });
+
+            e.Letmix('runner', {
+                color: '0, 200, 20'
+            }).ThenFlash(function (e) {
+                e.Letmix('runner', {
+                    color: '0, 200, 20'
+                });
+            });
+        });
+    }
+
+    function example2() {
+        $('#example2').Letmix({
+            colorIteration: '#32f732',
+            end: function (e) {
+                e.Letmix('runner', {
+                    color: '0, 200, 20',
+                    stopWhere: 'we love to do'
+                });
+                e.Letmix('runner', {
+                    direction: 'left=>right',
+                    color: '0, 100, 200',
+                    stopWhere: 'We do that'
+                });
+            }
+        });
+    }
+
+    function example1() {
+        $('#example1').Letmix({
+            amountIterations: -1,
+            speedIteration: 20,
+            chars: ['_', ' '],
+            type: 'line',
+            colorIteration: '000',
+            end: function (e) {
+                e.Letmix('runner', {
+                    direction: 'left=>right',
+                    color: '0, 100, 200'
+                });
+                e.Letmix('runner', {
+                    color: '0, 200, 20'
+                });
+            }
+        });
+    }
+
+    function letmixRunnerEnd() {
+        $('#letmix-runner-end').Letmix('runner', {
+            end: function () {
+                alert('Finish runner');
+            }
+        });
+    }
+
+    function letmixRunnerStart() {
+        $('#letmix-runner-start').Letmix('runner', {
+            start: function () {
+                alert('Start runner');
+            }
+        });
+    }
+
+    function letmixRunnerWait() {
+        $('#letmix-runner-wait').Letmix('runner', {
+            wait: 1000
+        });
+    }
+
+    function letmixRunnerStopWhere() {
+        $('#letmix-runner-stop-where').Letmix('runner', {
+            stopWhere: 'do'
+        });
+    }
+
+    function letmixRunnerDirection() {
+        $('#letmix-runner-direction').Letmix('runner', {
+            direction: 'left=>right'
+        });
+    }
+
+    function letmixRunnerColor() {
+        $('#letmix-runner-color').Letmix('runner', {
+            color: '0f0'
+        });
+    }
+
+    function letmixRunnerSpeed() {
+        $('#letmix-runner-speed').Letmix('runner', {
+            speed: 300
+        });
+    }
+
+    function letmixDoEnd() {
+        $('#letmix-do-end').Letmix({
+            end: function (object) {
+                alert('Finish');
+            }
+        });
+    }
+
+    function letmixDoStart() {
+        $('#letmix-do-start').Letmix({
+            start: function (object) {
+                alert('Start');
+                object.addClass('active');
+            }
+        });
+    }
+
+    function letmixDoWait() {
+        $('#letmix-do-wait').Letmix({
+            wait: 1000
+        });
+    }
+
+    function letmixDoSpeedIteration() {
+        $('#letmix-do-speed-iteration').Letmix({
+            speedIteration: 100
+        });
+    }
+
+    function letmixDoCustomOrder() {
+        $('#letmix-do-custom-order').Letmix({
+            typeIteration: 'custom',
+            customOrder: [1, 2, 3, 4, 0],
+            chars: ['A', 'B', 'C', 'D', 'E'],
+            speedIteration: 700
+        });
+    }
+
+    function letmixDoTypeIteration() {
+        $('#letmix-do-type-iteration').Letmix({
+            typeIteration: 'line',
+            amountIterations: 5,
+            chars: ['A', 'B', 'C', 'D', 'E'],
+            speedIteration: 300
+        });
+    }
+
+    function letmixDoChars() {
+        $('#letmix-do-chars').Letmix({
+            chars: ['1', '2', '3', '4', '5', '6']
+        });
+    }
+
+    function letmixDoColorIteration() {
+        $('#letmix-do-color-iteration').Letmix({
+            colorIteration: '#3f9'
+        });
+    }
+
+    function letmixDoAmountIterations() {
+        $('#letmix-do-amount-iterations').Letmix({
+            amountIterations: 40
+        });
+    }
+
+    function letmixDo() {
+        $('#letmix-do').Letmix();
+    }
+
+    function letmixRunner() {
+        $('#letmix-runner').Letmix('runner');
+    }
+
+    $(document).ready(function () {
+
+        $('h1.heading').Letmix({
+            amountIterations: 5,
+            speedIteration: 30,
+            chars: ['L', 'E', 'T', 'M', 'I', 'X'],
+        }).ThenFlash(function (e) {
+            e.Letmix('runner', {
+                stopWhere: 'L'
+            });
+        }).ThenFlash(function (e) {
+            e.Letmix('runner', {
+                stopWhere: 'Let',
+                direction: 'left=>right',
+                speed: 500
+            });
+        });
+
+        $('h2.underheading').Letmix({
+            amountIterations: 5,
+            speedIteration: 10,
+            chars: ['J', 'F', 'W', 'L', 'U', 'B'],
+            end: function (e) {
+                e.Letmix('runner', {
+                    direction: 'left=>right',
+                    color: '0, 100, 200',
+                    speed: 20
+                });
+                e.Letmix('runner', {
+                    color: '0, 200, 20',
+                    speed: 20,
+                    end: function (e) {
+                        e.Letmix('runner', {
+                            stopWhere: 'mix',
+                        });
+                    }
+                });
+            }
+        })
+
+    });
+</script>
+</body>
+</html>

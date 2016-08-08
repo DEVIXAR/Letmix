@@ -1,0 +1,17 @@
+{
+  "name": "letmix",
+  "main": "./src/letmix.js",
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    ".idea"
+  ],
+  "keywords": [
+    "letmix",
+    "javascript",
+    "typing",
+    "jquery",
+    "letters",
+    "mix"
+  ]
+}
